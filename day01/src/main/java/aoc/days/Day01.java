@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 public class Day01 extends AbstractDay {
     IntList listInput;
-    IntList listTripleSum;
 
     @Override
     public void convertInput(Stream<String> stream) {
@@ -17,29 +16,24 @@ public class Day01 extends AbstractDay {
                 stream.mapToInt(Integer::parseInt)
                         .toArray()
         );
-        listTripleSum = new IntArrayList(
-                IntStream.range(2, listInput.size())
-                        .map(i -> listInput.get(i - 2) + listInput.get(i - 1) + listInput.get(i))
-                        .toArray()
-        );
     }
 
-    private long countIncreasingDifferences(IntList list) {
-        return IntStream.range(1, list.size())
-                .map(i -> list.get(i) - list.get(i - 1))
+    private long countIncreasingDifferences(IntList list,int gap) {
+        return IntStream.range(gap, list.size())
+                .map(i -> list.get(i) - list.get(i - gap))
                 .filter(i -> i > 0)
                 .count();
     }
 
     @Override //1715
     public void part1() {
-        long result = countIncreasingDifferences(listInput);
+        long result = countIncreasingDifferences(listInput,1);
         result1 = Long.toString(result);
     }
 
     @Override //1739
     public void part2() {
-        long result = countIncreasingDifferences(listTripleSum);
+        long result = countIncreasingDifferences(listInput,3);
         result2 = Long.toString(result);
     }
 }
