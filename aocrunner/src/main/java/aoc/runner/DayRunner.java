@@ -74,7 +74,7 @@ public class DayRunner {
         Path path1 = findFile(forDay).orElse(Path.of(forDay.getFileNameWithPackage()));
         logger.debug("Path for input file to write is '{}'", path1.toAbsolutePath());
         Path path2 = Path.of(path1.toAbsolutePath().toString().replace("/target/classes/","/src/main/resources/"));
-        logger.debug("Path for input file changed to '{}'",path1.toAbsolutePath());
+        logger.debug("Path for input file changed to '{}'",path2.toAbsolutePath());
 
         writeFile(path1,input);
         writeFile(path2,input);
@@ -179,8 +179,9 @@ public class DayRunner {
         if (today.isPresent()) {
             logger.info("Event time detected! Running today.");
             DayRunner.run(today.orElseThrow());
+            return;
         }
-        logger.info("No day specified by command line or current time.");
+        logger.debug("No day specified by command line or current time.");
 
         //DayRunner.run(1);
     }

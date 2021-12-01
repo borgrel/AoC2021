@@ -26,6 +26,7 @@ public enum Config {
     public static @NotNull String sessionCookie() {
         return requiresKey(SESSION_COOKIE_KEY);
     }
+
     public static int year() {
         String value = requiresKey(YEAR_KEY);
         try {
