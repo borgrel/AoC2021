@@ -1,12 +1,10 @@
 package aoc.utils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.stream.Stream;
 
 public interface Example {
-    @NotNull Stream<String> sampleInput();
+    Stream<String> sampleInput();
 
-    @NotNull String sampleResultPart1();
-    @NotNull String sampleResultPart2();
+    String sampleResultPart1();
+    String sampleResultPart2();
 }
