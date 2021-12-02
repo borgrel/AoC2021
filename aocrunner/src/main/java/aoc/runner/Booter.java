@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.OptionalInt;
+import java.util.Scanner;
 
 public class Booter {
     static final Logger logger = LoggerFactory.getLogger(Booter.class);
@@ -26,8 +27,7 @@ public class Booter {
         }
     }
 
-    private static @NotNull
-    int[] parseArgs(final String[] args) {
+    private static @NotNull int[] parseArgs(final String[] args) {
         return Arrays.stream(args)
                 .skip(1)
                 .map(Booter::tryParseArg)
@@ -36,8 +36,18 @@ public class Booter {
                 .toArray();
     }
 
-    public static void main(String[] args) {
-        start(parseArgs(args));
+    private static void customRun() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Please enter the day(s) you wish to run: ");
+            try {
+                DayRunner.run(
+                        Integer.parseInt(scanner.nextLine()));
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid value '%s' is not a number.");
+            }
+        }
     }
 
     public static void start(int... days) {
@@ -53,8 +63,11 @@ public class Booter {
             DayRunner.run(today.orElseThrow());
             return;
         }
-        logger.debug("No day specified by command line or current time.");
+        logger.info("No day specified by command line or current time.");
+        customRun();
+    }
 
-        //DayRunner.run(1);
+    public static void main(String[] args) {
+        start(parseArgs(args));
     }
 }
