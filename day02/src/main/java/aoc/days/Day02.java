@@ -4,7 +4,6 @@ import aoc.utils.AbstractDay;
 import aoc.utils.Direction;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +18,10 @@ public class Day02 extends AbstractDay {
     public Instruction parseLine(String input) {
         String[] split = input.split(" ");
         Direction direction = directionMapping.get(split[0]);
-        if (direction == null) throw new IllegalStateException("Input file includes invalid entry: '%s'".formatted(split[0]));
+        if (direction == null)
+            throw new IllegalStateException("Input file includes invalid entry: '%s'".formatted(split[0]));
         int value = Integer.parseInt(split[1]);
-        return new Instruction(direction,value);
+        return new Instruction(direction, value);
     }
 
     @Override
@@ -30,37 +30,34 @@ public class Day02 extends AbstractDay {
                 .toList();
     }
 
-    @Override
+    @Override //1728414
     public void part1() {
         Map<Direction, Long> result = new EnumMap<>(Direction.class);
         directionMapping.values()
-                .stream()
                 .forEach(direction -> result.put(direction, 0L));
-        instructions.stream()
-                .forEach(instruction -> result.compute(instruction.direction(),
-                        (direction, mapValue) -> mapValue + instruction.value()));
+        instructions.forEach(instruction -> result.computeIfPresent(instruction.direction(),
+                (direction, mapValue) -> mapValue + instruction.value()));
         long x = result.get(Direction.FORWARD);
         long y = result.get(Direction.DOWN) - result.get(Direction.UP);
-        result1 = Long.toString(x*y);
+        result1 = Long.toString(x * y);
     }
 
-    @Override
+    @Override //1765720035
     public void part2() {
         Map<Direction, Long> result = new EnumMap<>(Direction.class);
         directionMapping.values()
-                .stream()
                 .forEach(direction -> result.put(direction, 0L));
         instructions.stream()
                 .map(Instruction::adjustAim)
                 .filter(instruction -> instruction.direction().equals(Direction.FORWARD))
                 .forEach(instruction -> {
-                    result.compute(instruction.direction(),
+                    result.computeIfPresent(instruction.direction(),
                             (direction, mapValue) -> mapValue + instruction.value());
-                    result.compute(Direction.DOWN,
+                    result.computeIfPresent(Direction.DOWN,
                             (direction, mapValue) -> mapValue + (long) instruction.value() * Instruction.getAim());
                 });
         long x = result.get(Direction.FORWARD);
         long y = result.get(Direction.DOWN);
-        result2 = Long.toString(x*y);
+        result2 = Long.toString(x * y);
     }
 }
