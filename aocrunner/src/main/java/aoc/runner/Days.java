@@ -30,17 +30,27 @@ public enum Days {
 
     private static final String packageName = "aoc.days";
 
+    public static Days dayFromInt(int value) {
+        if (value < 0 || value > Days.values().length) {
+            throw new IllegalArgumentException("This enum: '%s' only has %d elements, %d is an illegal value"
+                    .formatted(Days.class.getSimpleName(), Days.values().length, value));
+        }
+        return Days.values()[value - 1];
+    }
+
+    public String upperCaseFirstLetter() {
+        return name().toLowerCase().replaceFirst("d", "D");
+    }
+
     public String getFileName() {
         return "/%s.txt".formatted(name().toLowerCase());
     }
+
     public String getFileNameWithPackage() {
-        return "/%s%s".formatted(packageName.replace(".","/"), getFileName());
-    }
-    public String getClassName() {
-        return "%s.%s".formatted(packageName, name().toLowerCase().replaceFirst("d","D"));
+        return "/%s%s".formatted(packageName.replace(".", "/"), getFileName());
     }
 
-    public static Days dayFromInt(int value) {
-        return Days.values()[value-1];
+    public String getClassName() {
+        return "%s.%s".formatted(packageName, upperCaseFirstLetter());
     }
 }
