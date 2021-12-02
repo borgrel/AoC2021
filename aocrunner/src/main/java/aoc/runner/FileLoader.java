@@ -18,8 +18,7 @@ public class FileLoader {
     static final Logger logger = LoggerFactory.getLogger(FileLoader.class);
 
     // ----------++- FILE UTILITIES -++---------------------------------------
-    public static @NotNull
-    Optional<URI> checkedToURI(@NotNull URL url) {
+    public static @NotNull Optional<URI> checkedToURI(@NotNull URL url) {
         try {
             return Optional.of(url.toURI());
         } catch (URISyntaxException e) {
@@ -28,8 +27,7 @@ public class FileLoader {
         return Optional.empty();
     }
 
-    public static @NotNull
-    Optional<Path> findFile(Days forDay) {
+    public static @NotNull Optional<Path> findFile(Days forDay) {
         return Optional.ofNullable(Booter.class.getResource(forDay.getFileNameWithPackage()))
                 .or(() -> Optional.ofNullable(Booter.class.getResource(forDay.getFileName())))
                 .flatMap(FileLoader::checkedToURI)
@@ -42,8 +40,7 @@ public class FileLoader {
                 .filter(Files::exists);
     }
 
-    public static @NotNull
-    Optional<Stream<String>> readFile(@NotNull Path path) {
+    public static @NotNull Optional<Stream<String>> readFile(@NotNull Path path) {
         if (Files.notExists(path)) {
             throw new IllegalArgumentException("Unable to read non-existing file");
         }
@@ -75,13 +72,11 @@ public class FileLoader {
         writeFile(path2, input);
     }
 
-    public static @NotNull
-    Optional<Stream<String>> readInput(int dayIndex) {
+    public static @NotNull Optional<Stream<String>> readInput(int dayIndex) {
         return readInput(Days.dayFromInt(dayIndex));
     }
 
-    public static @NotNull
-    Optional<Stream<String>> readInput(Days forDay) {
+    public static @NotNull Optional<Stream<String>> readInput(Days forDay) {
         return findFile(forDay)
                 .flatMap(FileLoader::readFile);
     }

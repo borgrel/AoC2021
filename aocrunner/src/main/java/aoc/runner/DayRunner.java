@@ -15,8 +15,7 @@ public class DayRunner {
 
     static final String INCOMPLETE = "No solution yet";
 
-    private static @NotNull
-    String printResults(@NotNull Day solution) {
+    private static @NotNull String printResults(@NotNull Day solution) {
         String title = solution.getClass().getSimpleName() + ":";
         return Stream.of(
                         title,
