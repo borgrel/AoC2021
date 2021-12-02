@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -19,7 +20,6 @@ import java.util.stream.Stream;
 public class Scraper {
     private static final Logger logger = LoggerFactory.getLogger(Scraper.class);
 
-    private static final int UNAUTHORIZED_REQUEST = 401;
     private static final String SESSION_COOKIE = Config.sessionCookie();
     private static final HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
 
@@ -32,11 +32,12 @@ public class Scraper {
                     authenticatedRequest(address),
                     HttpResponse.BodyHandlers.ofLines());
 
-            if (response.statusCode() == UNAUTHORIZED_REQUEST) {
+            if (response.statusCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 throw new IllegalStateException("Session Cookie invalid");
             }
 
             return Optional.of(response.body());
+            
         } catch (IOException e) {
             logger.error("Failed to connect to server: '{}'", address, e);
         } catch (InterruptedException e) {
