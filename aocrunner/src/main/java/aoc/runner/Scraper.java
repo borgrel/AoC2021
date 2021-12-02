@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 public class Scraper {
     private static final Logger logger = LoggerFactory.getLogger(Scraper.class);
 
+    private static final int UNAUTHORIZED_REQUEST = 401;
     private static final String SESSION_COOKIE = Config.sessionCookie();
     private static final HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
 
@@ -31,12 +32,15 @@ public class Scraper {
                     authenticatedRequest(address),
                     HttpResponse.BodyHandlers.ofLines());
 
-            return Optional.of(response.body());
+            if (response.statusCode() == UNAUTHORIZED_REQUEST) {
+                throw new IllegalStateException("Session Cookie invalid");
+            }
 
+            return Optional.of(response.body());
         } catch (IOException e) {
             logger.error("Failed to connect to server: '{}'", address, e);
         } catch (InterruptedException e) {
-            throw new IllegalStateException("Session Cookie invalid", e);
+            Thread.currentThread().interrupt();
         }
         return Optional.empty();
     }
