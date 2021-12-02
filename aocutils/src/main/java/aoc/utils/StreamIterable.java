@@ -1,5 +1,7 @@
 package aoc.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -11,12 +13,12 @@ public final class StreamIterable<T> implements Iterable<T> {
         this.stream = stream;
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        return stream.iterator();
-    }
-
     public static <T> StreamIterable<T> of(Stream<T> stream) {
         return new StreamIterable<>(stream);
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return stream.iterator();
     }
 }
