@@ -27,13 +27,13 @@ public class Day01 extends AbstractDay {
 
     @Override //1715
     public void part1() {
-        long result = countIncreasingDifferences(listInput,1);
-        result1 = Long.toString(result);
+        result1 = Long.toString(
+                countIncreasingDifferences(listInput,1));
     }
 
     @Override //1739
     public void part2() {
-        long result = countIncreasingDifferences(listInput,3);
-        result2 = Long.toString(result);
+        result2 = Long.toString(
+                countIncreasingDifferences(listInput,3));
     }
 }

@@ -12,6 +12,7 @@
         <module>aocutils</module>
         <module>day01</module>
         <module>aocrunner</module>
+        <module>day02</module>
     </modules>
 
     <properties>
@@ -37,14 +38,14 @@
             <artifactId>streamex</artifactId>
             <version>0.8.0</version>
         </dependency>
-        <!-- Gui dependencies -->
-        <!-- QOS dependencies -->
         <dependency>
             <!-- Collections Framework for primitives -->
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections</artifactId>
             <version>10.4.0</version>
         </dependency>
+        <!-- Gui dependencies -->
+        <!-- QOS dependencies -->
         <dependency>
             <!-- Boilerplate Reduction -->
             <groupId>org.projectlombok</groupId>

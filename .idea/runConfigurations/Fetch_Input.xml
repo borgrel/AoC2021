@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Server Connection" type="Application" factoryName="Application">
+  <configuration default="false" name="Fetch Input" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="aoc.runner.Scraper" />
     <module name="aocrunner" />
     <extension name="coverage">

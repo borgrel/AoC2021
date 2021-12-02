@@ -10,6 +10,6 @@ public interface Day {
     void part1();
     void part2();
 
-    Optional<String> result1();
-    Optional<String> result2();
+    @NotNull Optional<String> result1();
+    @NotNull Optional<String> result2();
 }
