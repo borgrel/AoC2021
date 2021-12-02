@@ -89,29 +89,6 @@ public class DayRunner {
                 .flatMap(DayRunner::readFile);
     }
 
-
-    // ----------++- DYNAMIC START UTILITIES -++---------------------------------------
-    public static Day invokeDay(int value) {
-        return invokeDay(Days.dayFromInt(value));
-    }
-
-    public static Day invokeDay(Days dayNum) {
-        String className = dayNum.getClassName();
-        try {
-            return invoke(className);
-        } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            logger.error("Error invoking and instantiating %s via reflection".formatted(className));
-            throw new IllegalArgumentException("Unable to locate .class for '%s'".formatted(className), e);
-        }
-    }
-
-    public static <T> T invoke(String className) throws ClassNotFoundException, IllegalAccessException,
-            InvocationTargetException, InstantiationException {
-        @SuppressWarnings("unchecked")
-        T t = (T) DayRunner.class.getClassLoader().loadClass(className).getConstructors()[0].newInstance();
-        return t;
-    }
-
     private static @NotNull String printResults(@NotNull Day solution) {
         String title = solution.getClass().getSimpleName() + ":";
         return Stream.of(
@@ -128,7 +105,7 @@ public class DayRunner {
         }
 
         final Days day = Days.dayFromInt(forDay);
-        final Day solution = DayRunner.invokeDay(day);
+        final Day solution = Invoker.invokeDay(day);
 
         Optional<Stream<String>> input = readInput(day);
         if (input.isEmpty()) {
