@@ -25,6 +25,7 @@ public class DayRunner {
                 .collect(Collectors.joining("\n  "));
     }
 
+    @SuppressWarnings("java:S106")
     public static void run(int forDay) {
         if (logger.isInfoEnabled()) {
             logger.info("Running starter for Day%02d%n".formatted(forDay));

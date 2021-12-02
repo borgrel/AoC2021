@@ -36,6 +36,7 @@ public class Booter {
                 .toArray();
     }
 
+    @SuppressWarnings("java:S106")
     private static void customRun() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
