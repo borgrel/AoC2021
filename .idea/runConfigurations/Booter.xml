@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DayRunner" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="aoc.runner.DayRunner" />
+  <configuration default="false" name="Booter" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="aoc.runner.Booter" />
     <module name="aocrunner" />
     <extension name="coverage">
       <pattern>

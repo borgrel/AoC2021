@@ -25,7 +25,7 @@ public class Scraper {
     private static final String URI_TEMPATE = "https://adventofcode.com/%s/day/%s/input";
 
     private static Optional<Stream<String>> getDataFromServer(final int year, final int day) {
-        final URI address = aocInputURI(year,day);
+        final URI address = aocInputURI(year, day);
         try {
             HttpResponse<Stream<String>> response = httpClient.send(
                     authenticatedRequest(address),
@@ -40,8 +40,10 @@ public class Scraper {
         }
         return Optional.empty();
     }
-    private static @NotNull String uriFor(final int year, final int day) {
-        return URI_TEMPATE.formatted(year,day);
+
+    private static @NotNull
+    String uriFor(final int year, final int day) {
+        return URI_TEMPATE.formatted(year, day);
     }
 
     private static URI aocInputURI(final int year, final int day) {
@@ -60,13 +62,13 @@ public class Scraper {
 
     public static void main(String[] args) {
         final int year = Config.year();
-        Time.getCurrentAoCDay().ifPresent( day -> {
+        Time.getCurrentAoCDay().ifPresent(day -> {
 
-            List<String> input = getDataFromServer(year,day)
-                    .orElseThrow(() -> new NoSuchElementException("Unable to retrieve AoC input for %s-%s from the server".formatted(year,day)))
+            List<String> input = getDataFromServer(year, day)
+                    .orElseThrow(() -> new NoSuchElementException("Unable to retrieve AoC input for %s-%s from the server".formatted(year, day)))
                     .toList();
 
-            DayRunner.writeOrCreateFile(input, Days.dayFromInt(day));
+            FileLoader.writeOrCreateFile(input, Days.dayFromInt(day));
         });
     }
 }

@@ -29,7 +29,7 @@ public enum Invoker {
     public static <T> T invoke(String className) throws ClassNotFoundException, IllegalAccessException,
             InvocationTargetException, InstantiationException {
         @SuppressWarnings("unchecked")
-        T t = (T) DayRunner.class.getClassLoader().loadClass(className).getConstructors()[0].newInstance();
+        T t = (T) Booter.class.getClassLoader().loadClass(className).getConstructors()[0].newInstance();
         return t;
     }
 }
