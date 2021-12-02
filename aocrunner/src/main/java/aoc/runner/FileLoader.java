@@ -14,7 +14,9 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class FileLoader {
+public enum FileLoader {
+    ;
+    
     static final Logger logger = LoggerFactory.getLogger(FileLoader.class);
 
     // ----------++- FILE UTILITIES -++---------------------------------------
