@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Utils {
+public enum Utils {
+    ;
+    
     public static TextBlockCollector toTextBlock() {
         return new TextBlockCollector();
     }
