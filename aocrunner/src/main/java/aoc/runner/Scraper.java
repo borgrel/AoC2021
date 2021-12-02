@@ -19,10 +19,10 @@ import java.util.stream.Stream;
 public class Scraper {
     private static final Logger logger = LoggerFactory.getLogger(Scraper.class);
 
-    private static final String sessionID = Config.sessionCookie();
+    private static final String SESSION_COOKIE = Config.sessionCookie();
     private static final HttpClient httpClient = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
 
-    private static final String URI_TEMPATE = "https://adventofcode.com/%s/day/%s/input";
+    private static final String URI_TEMPLATE = "https://adventofcode.com/%s/day/%s/input";
 
     private static Optional<Stream<String>> getDataFromServer(final int year, final int day) {
         final URI address = aocInputURI(year, day);
@@ -43,20 +43,20 @@ public class Scraper {
 
     private static @NotNull
     String uriFor(final int year, final int day) {
-        return URI_TEMPATE.formatted(year, day);
+        return URI_TEMPLATE.formatted(year, day);
     }
 
     private static URI aocInputURI(final int year, final int day) {
         try {
             return new URI(uriFor(year, day));
         } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("Attempted to construct a Malformed URI: " + URI_TEMPATE, e);
+            throw new IllegalArgumentException("Attempted to construct a Malformed URI: " + URI_TEMPLATE, e);
         }
     }
 
     private static HttpRequest authenticatedRequest(URI uri) {
         return HttpRequest.newBuilder(uri)
-                .header("Cookie", "session=" + sessionID)
+                .header("Cookie", "session=" + SESSION_COOKIE)
                 .build();
     }
 
