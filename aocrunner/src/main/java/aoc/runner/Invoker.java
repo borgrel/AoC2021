@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class Invoker {
-    static final Logger logger = LoggerFactory.getLogger(Invoker.class);
+public enum Invoker {
+    ;
+
+    private static final Logger logger = LoggerFactory.getLogger(Invoker.class);
 
     // ----------++- DYNAMIC START UTILITIES -++---------------------------------------
     public static <T extends Day> T invokeDay(int value) {
