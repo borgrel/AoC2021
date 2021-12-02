@@ -50,7 +50,11 @@ public enum Days {
         return "/%s%s".formatted(PACKAGE_NAME.replace(".", "/"), getFileName());
     }
 
-    public String getClassName() {
+    public String getDayClassName() {
         return "%s.%s".formatted(PACKAGE_NAME, upperCaseFirstLetter());
+    }
+
+    public String getExampleClassName() {
+        return getDayClassName() + "Example";
     }
 }

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 
 class Day01Example implements Example {
-    static String testInput = """
+    private static final String testInput = """
             199
             200
             208
@@ -41,11 +41,11 @@ class Day01Example implements Example {
     }
 
     @Override
-    public String sampleResultPart1() {
+    public String resultPart1() {
         return null;
     }
 
-    @Override public String sampleResultPart2() {
+    @Override public String resultPart2() {
         return null;
     }
 }
