@@ -28,7 +28,7 @@ public enum Days {
     DAY25,
     OUTPUT;
 
-    private static final String packageName = "aoc.days";
+    private static final String PACKAGE_NAME = "aoc.days";
 
     public static Days dayFromInt(int value) {
         if (value < 0 || value > Days.values().length) {
@@ -47,10 +47,10 @@ public enum Days {
     }
 
     public String getFileNameWithPackage() {
-        return "/%s%s".formatted(packageName.replace(".", "/"), getFileName());
+        return "/%s%s".formatted(PACKAGE_NAME.replace(".", "/"), getFileName());
     }
 
     public String getClassName() {
-        return "%s.%s".formatted(packageName, upperCaseFirstLetter());
+        return "%s.%s".formatted(PACKAGE_NAME, upperCaseFirstLetter());
     }
 }
