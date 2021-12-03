@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public enum Utils {
     ;
-    
+
     public static TextBlockCollector toTextBlock() {
         return new TextBlockCollector();
     }
@@ -29,5 +29,17 @@ public enum Utils {
         return input.stream()
                 .map(Arrays::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public static String stringConcat(int... values) {
+        return Arrays.stream(values)
+                .mapToObj(Integer::toString)
+                .collect(Collectors.joining(""));
+    }
+
+    public static <T> String stringConcat(T... values) {
+        return Arrays.stream(values)
+                .map(Objects::toString)
+                .collect(Collectors.joining(""));
     }
 }

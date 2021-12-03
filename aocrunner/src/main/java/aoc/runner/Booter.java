@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.OptionalInt;
 import java.util.Scanner;
 
-public class Booter {
+public enum Booter {
+    ;
+    
     static final Logger logger = LoggerFactory.getLogger(Booter.class);
 
     private static OptionalInt tryParseArg(@NotNull String input) {

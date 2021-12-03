@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -11,7 +12,6 @@ import java.util.stream.Stream;
 
 public class Day03 extends AbstractDay {
     List<int[]> input;
-    int[] count;
 
     private int[] parseArray(String[] input) {
         return Arrays.stream(input)
@@ -28,35 +28,40 @@ public class Day03 extends AbstractDay {
                 .toArray();
     }
 
+    private String multiplyBinary(String str1, String str2) {
+        return Integer.toString(
+                Integer.parseInt(str1, 2) *
+                        Integer.parseInt(str2, 2));
+    }
+
     private int[] countOccurrences(List<int[]> input) {
         int[] initial = new int[input.get(0).length];
         return input.stream()
                 .reduce(initial, this::sumArrays);
     }
 
+    private int[] mostCommon(List<int[]> input) {
+        return Arrays.stream(countOccurrences(input))
+                .map(value -> (value < input.size() - value) ? 0 : 1)
+                .toArray();
+    }
+
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
-        input = stream
-                .map(str -> str.split(""))
+        input = stream.map(str -> str.split(""))
                 .map(this::parseArray)
                 .toList();
-
-        count = countOccurrences(input);
     }
 
     @Override //3687446
     public void part1() {
-        final int limit = input.size() / 2;
+        String gammaRate = Utils.stringConcat(mostCommon(input));
 
-        String gammaRate = Arrays.stream(count)
-                .mapToObj(i -> (i < limit) ? "0" : "1")
-                .collect(Collectors.joining(""));
         String epsilonRate = Arrays.stream(gammaRate.split(""))
                 .map(str -> (str.equals("0") ? "1" : "0"))
                 .collect(Collectors.joining(""));
 
-        result1 = Integer.toString(Integer.parseInt(gammaRate, 2) *
-                Integer.parseInt(epsilonRate, 2));
+        result1 = multiplyBinary(gammaRate, epsilonRate);
     }
 
     private int[] filter(List<int[]> input, boolean filterLeast) {
@@ -64,15 +69,11 @@ public class Day03 extends AbstractDay {
         for (int i = 0; i < input.get(0).length; i++) {
             if (runner.size() <= 1) break;
 
-            int index = i;
-            int limit = runner.size();
-            int[] count = Arrays.stream(countOccurrences(runner))
-                    .map(value -> (value < limit - value) ? 0 : 1)
-                    .toArray();
+            int index = i; //needs effectively final
+            int[] count = mostCommon(runner);
 
             runner = runner.stream()
-                    .filter(array -> filterLeast && count[index] == array[index]
-                            || !filterLeast && count[index] != array[index])
+                    .filter(array -> filterLeast ^ count[index] != array[index])
                     .toList();
         }
         return runner.get(0);
@@ -88,15 +89,9 @@ public class Day03 extends AbstractDay {
 
     @Override
     public void part2() {
-        String oxygenGenRating = Arrays.stream(filterLeastCommon(input))
-                .mapToObj(Integer::toString)
-                .collect(Collectors.joining(""));
+        String oxygenGenRating = Utils.stringConcat(filterLeastCommon(input));
+        String co2ScrubRating = Utils.stringConcat(filterMostCommon(input));
 
-        String co2ScrubRating = Arrays.stream(filterMostCommon(input))
-                .mapToObj(Integer::toString)
-                .collect(Collectors.joining(""));
-
-        result2 = Integer.toString(Integer.parseInt(oxygenGenRating, 2) *
-                Integer.parseInt(co2ScrubRating, 2));
+        result2 = multiplyBinary(oxygenGenRating, co2ScrubRating);
     }
 }
