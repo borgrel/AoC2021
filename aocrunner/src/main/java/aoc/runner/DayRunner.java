@@ -35,7 +35,8 @@ public enum DayRunner {
         } else {
             result.filter(str -> str.equals(example))
                     .ifPresentOrElse(str -> logger.info("%s Example run succeeded".formatted(description)),
-                            () -> logger.warn("%s Example run failed".formatted(description)));
+                            () -> logger.warn("%s Example run failed, result of '%s' instead of '%s'"
+                                    .formatted(description, result.orElseThrow(), example)));
         }
     }
 

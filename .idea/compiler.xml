@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="aocutils" />
+        <module name="day03" />
         <module name="day02" />
         <module name="day01" />
         <module name="aocrunner" />
