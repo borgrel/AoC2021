@@ -21,7 +21,7 @@ public class Day03 extends AbstractDay {
 
     private int[] sumArrays(int[] array1, int[] array2) {
         if (array1.length != array2.length)
-            throw new IllegalArgumentException("Arrays are differant sizes: %s and %s"
+            throw new IllegalArgumentException("Arrays are different sizes: %s and %s"
                     .formatted(Arrays.toString(array1), Arrays.toString(array2)));
         return IntStream.range(0, array1.length)
                 .map(i -> array1[i] + array2[i])
