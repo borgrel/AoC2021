@@ -42,9 +42,9 @@
         </dependency>
         <dependency>
             <!-- Collections Framework for primitives -->
-            <groupId>org.eclipse.collections</groupId>
-            <artifactId>eclipse-collections</artifactId>
-            <version>10.4.0</version>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>8.5.6</version>
         </dependency>
         <!-- Gui dependencies -->
         <!-- QOS dependencies -->

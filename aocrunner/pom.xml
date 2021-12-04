@@ -31,6 +31,18 @@
         </dependency>
         <dependency>
             <groupId>borgrel.aoc</groupId>
+            <artifactId>day03</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>borgrel.aoc</groupId>
+            <artifactId>day04</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>borgrel.aoc</groupId>
             <artifactId>aocutils</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
