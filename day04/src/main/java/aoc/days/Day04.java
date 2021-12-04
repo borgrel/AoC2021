@@ -17,7 +17,7 @@ public class Day04 extends AbstractDay {
     Set<BingoBoard> alreadyWon = new HashSet<>();
     BingoMap bingoMap;
 
-    int tempPause;
+    int resumeFrom;
 
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
@@ -41,13 +41,14 @@ public class Day04 extends AbstractDay {
 
     @Override //10680
     public void part1() {
-        for (int number : bingoNumbers) {
+        for (int i = 0; i < bingoNumbers.size(); i++) {
+            int number = bingoNumbers.getInt(i);
             bingoMap.markPositions(number);
             Optional<BingoBoard> winner = bingoMap.boardsWithNumber(number).filter(BingoBoard::hasWon).findAny();
             if (winner.isPresent()) {
                 result1 = Long.toString(winner.orElseThrow().sumUnmarked() * number);
                 alreadyWon.add(winner.orElseThrow());
-                tempPause = number;
+                resumeFrom = i + 1;
                 return;
             }
         }
@@ -56,14 +57,9 @@ public class Day04 extends AbstractDay {
     @Override //31892
     public void part2() {
         AtomicInteger wonBoards = new AtomicInteger(1);
-        boolean skipping = true;
 
-        for (int number : bingoNumbers) {
-            if (skipping) {
-                if (number == tempPause)
-                    skipping = false;
-                continue;
-            }
+        for (int i = resumeFrom; i < bingoNumbers.size(); i++) {
+            int number = bingoNumbers.getInt(i);
             bingoMap.markPositions(number);
 
             bingoMap.boardsWithNumber(number)
@@ -74,7 +70,6 @@ public class Day04 extends AbstractDay {
                         alreadyWon.add(winner);
                         if (wonBoards.get() == bingoBoards.size()) {
                             result2 = Long.toString(winner.sumUnmarked() * number);
-                            return;
                         }
                     });
         }
