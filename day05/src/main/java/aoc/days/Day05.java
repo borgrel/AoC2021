@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Day05 extends AbstractDay {
     List<Line> input;
 
-    @Override //5145
+    @Override
     public void convertInput(@NotNull Stream<String> stream) {
         input = stream.map(Line::of).toList();
     }
@@ -29,12 +29,12 @@ public class Day05 extends AbstractDay {
         return duplicateValues.size();
     }
 
-    @Override //16518
+    @Override //5145
     public void part1() {
         result1 = Integer.toString(countIntersections(false));
     }
 
-    @Override
+    @Override //16518
     public void part2() {
         result2 = Integer.toString(countIntersections(true));
     }
