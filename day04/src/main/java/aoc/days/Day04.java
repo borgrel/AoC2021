@@ -19,6 +19,9 @@ public class Day04 extends AbstractDay {
 
     int resumeFrom;
 
+    //suggestion from Roukanken#8774 map bingo numbers to their order, substitute boards numbers for their order value
+    // find max for each row and column, min of those is the time when that board would have won, sort by those values
+    
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
         List<List<String>> input = stream.collect(Utils.toTextBlock()).toList();
