@@ -20,12 +20,11 @@ public class Day05 extends AbstractDay {
         Set<Coord> dangerCoords = new HashSet<>();
         Set<Coord> duplicateValues = new HashSet<>();
 
-        input.stream().flatMap(withDiags ? Line::points : Line::pointsWithoutDiag)
+        input.stream().flatMap(withDiags ? Line::points : Line::pointsWithoutDiagonals)
                 .forEach(coord -> {
                     if (dangerCoords.contains(coord)) {
                         duplicateValues.add(coord);
-                    } else
-                        dangerCoords.add(coord);
+                    } else dangerCoords.add(coord);
                 });
         return duplicateValues.size();
     }

@@ -1,7 +1,5 @@
 package aoc.days;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -20,24 +18,12 @@ public record Line(Coord c1, Coord c2) {
         int xDiff = increment(c2.x(), c1.x());
         int yDiff = increment(c2.y(), c1.y());
 
-        List<Coord> results = new ArrayList<>();
-        Coord current = c1;
-        while (current.x() != c2.x() || current.y() != c2.y()) {
-            results.add(current);
-            current = new Coord(current.x() + xDiff, current.y() + yDiff);
-        }
-        results.add(current);
-        return results.stream();
-        /* not working?
-            return Stream.iterate(c1, coord -> coord.x() <= c2.x() && coord.y() <= c2.y(),
+        return Stream.iterate(c1, coord -> coord.x() != c2.x() || coord.y() != c2.y(),
                 coord -> new Coord(coord.x() + xDiff, coord.y() + yDiff));
-         */
     }
 
-    public Stream<Coord> pointsWithoutDiag() {
-        int xDiff = increment(c2.x(), c1.x());
-        int yDiff = increment(c2.y(), c1.y());
-        if (xDiff != 0 && yDiff != 0) return Stream.empty();
+    public Stream<Coord> pointsWithoutDiagonals() {
+        if (c1.x() != c2().x() && c1.y() != c2().y()) return Stream.empty();
         return points();
     }
 
