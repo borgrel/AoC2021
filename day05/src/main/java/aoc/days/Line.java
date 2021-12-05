@@ -18,8 +18,10 @@ public record Line(Coord c1, Coord c2) {
         int xDiff = increment(c2.x(), c1.x());
         int yDiff = increment(c2.y(), c1.y());
 
-        return Stream.iterate(c1, coord -> coord.x() != c2.x() || coord.y() != c2.y(),
-                coord -> new Coord(coord.x() + xDiff, coord.y() + yDiff));
+        return Stream.concat(Stream.iterate(c1,
+                        coord -> coord.x() != c2.x() || coord.y() != c2.y(),
+                        coord -> new Coord(coord.x() + xDiff, coord.y() + yDiff)),
+                Stream.of(c2));
     }
 
     public Stream<Coord> pointsWithoutDiagonals() {
