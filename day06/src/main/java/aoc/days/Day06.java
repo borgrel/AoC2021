@@ -16,7 +16,7 @@ public class Day06 extends AbstractDay {
 
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
-        lanternFishInitial = new long[MATURATION_TIME + 1];
+        lanternFishInitial = new long[MATURATION_TIME];
         stream.map(str -> str.split(","))
                 .flatMap(Arrays::stream)
                 .mapToInt(Integer::parseInt)
@@ -24,16 +24,12 @@ public class Day06 extends AbstractDay {
     }
 
     private long[] simulateLifeCycle(long[] lanternFish, int from, int until) {
-        long[] simulating = Arrays.copyOf(lanternFish, lanternFish.length);
+        CircularLongArray simulating = new CircularLongArray(lanternFish);
         for (int i = from; i <= until; i++) {
-            simulating[BREEDING_TIME] += simulating[0];
-            simulating[MATURATION_TIME] += simulating[0];
-
-            long[] temp = new long[MATURATION_TIME + 1];
-            System.arraycopy(simulating, 1, temp, 0, 9);
-            simulating = temp;
+            simulating.add(BREEDING_TIME, simulating.peek());
+            simulating.advance();
         }
-        return simulating;
+        return simulating.toArray();
     }
 
     @Override //390923
