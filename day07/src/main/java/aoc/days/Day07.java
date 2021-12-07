@@ -10,7 +10,7 @@ import java.util.function.IntUnaryOperator;
 import java.util.stream.Stream;
 
 public class Day07 extends AbstractDay {
-    private final IntUnaryOperator increasingCost = i -> (i + 1) * i / 2;
+    private static final IntUnaryOperator increasingCost = i -> (i + 1) * i / 2;
     IntList depths;
 
     @Override
@@ -33,7 +33,7 @@ public class Day07 extends AbstractDay {
         int[] medianValues = depths.intStream()
                 .sorted()
                 .skip(skipForMiddle)
-                .limit(depths.size() - 2 * skipForMiddle)
+                .limit((long) depths.size() - 2 * skipForMiddle)
                 .toArray();
         int median = Arrays.stream(medianValues).sum() / medianValues.length;
 
@@ -44,8 +44,7 @@ public class Day07 extends AbstractDay {
 
     @Override //95476248 too high
     public void part2() {
-        int ave = (int) Math.round(depths.intStream().sum() / (double) depths.size());
-        int forDepth = ave;
+        int forDepth = (int) Math.round(depths.intStream().sum() / (double) depths.size());
         long fuelUsed1 = calculateFuelUsed(depths, forDepth--, increasingCost);
         long fuelUsed2 = calculateFuelUsed(depths, forDepth--, increasingCost);
         while (fuelUsed2 < fuelUsed1) {
