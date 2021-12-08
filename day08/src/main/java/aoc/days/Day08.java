@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -41,12 +40,8 @@ public class Day08 extends AbstractDay {
 
     @Override //908067
     public void part2() {
-        AtomicLong sum = new AtomicLong(0);
-        input.forEach(puzzle -> {
-            Segments solver = Segments.solverOf(puzzle.patterns());
-            int value = solver.getOutput(puzzle.outputs());
-            sum.getAndAdd(value);
-        });
-        result2 = Long.toString(sum.get());
+        result2 = Long.toString(input.stream()
+                .mapToInt(Segments::solverFor)
+                .sum());
     }
 }

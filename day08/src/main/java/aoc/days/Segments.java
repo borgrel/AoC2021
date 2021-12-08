@@ -1,5 +1,7 @@
 package aoc.days;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -50,10 +52,14 @@ public class Segments {
         solvedSegments = 0;
     }
 
-    public static Segments solverOf(List<String> puzzle) {
+    @NotNull public static Segments solverOf(List<String> input) {
         Segments solver = new Segments();
-        solver.solve(puzzle);
+        solver.solve(input);
         return solver;
+    }
+
+    public static int solverFor(@NotNull Puzzle puzzle) {
+        return solverOf(puzzle.patterns()).getOutput(puzzle.outputs());
     }
 
     public boolean isSolved() {
@@ -72,7 +78,7 @@ public class Segments {
                 .orElseThrow();
     }
 
-    public int getOutput(List<String> outputs) {
+    public int getOutput(@NotNull List<String> outputs) {
         int value = 0;
         for (String output : outputs) {
             value = value * 10 + mapToValue(toSet(output));
@@ -80,7 +86,7 @@ public class Segments {
         return value;
     }
 
-    private boolean initialise(List<String> sorted) {
+    private boolean initialise(@NotNull List<String> sorted) {
         if (sorted.get(0).length() == 2) {
             scrambledNumbers.put(ONE, toSet(sorted.get(0)));
         } else return false;
@@ -96,7 +102,7 @@ public class Segments {
         return true;
     }
 
-    private Set<Character> findPattern(List<Set<Character>> possibles, Set<Character> remove, int uniqueResult) {
+    private Set<Character> findPattern(@NotNull List<Set<Character>> possibles, Set<Character> remove, int uniqueResult) {
         int numberOfSolutions = 0;
         Set<Character> result = null;
         for (Set<Character> possible : possibles) {
@@ -112,7 +118,7 @@ public class Segments {
         return result;
     }
 
-    public void solve(List<String> scrambles) {
+    public void solve(@NotNull List<String> scrambles) {
         if (scrambles.size() != 10) {
             throw new IllegalArgumentException(
                     "Cannot determine the segments without 10 patterns: %d".formatted(scrambles.size()));
@@ -172,7 +178,7 @@ public class Segments {
         findLetter(G, scrambledNumbers.get(FIVE), temp);
     }
 
-    private Set<Character> toSet(String input) {
+    private Set<Character> toSet(@NotNull String input) {
         char[] chars = input.toCharArray();
         return IntStream.range(0, chars.length)
                 .mapToObj(i -> chars[i])
