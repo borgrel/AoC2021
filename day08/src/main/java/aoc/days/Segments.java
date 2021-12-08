@@ -50,6 +50,12 @@ public class Segments {
         solvedSegments = 0;
     }
 
+    public static Segments solverOf(List<String> puzzle) {
+        Segments solver = new Segments();
+        solver.solve(puzzle);
+        return solver;
+    }
+
     public boolean isSolved() {
         return solvedSegments == standardLayout.length;
     }
@@ -57,7 +63,7 @@ public class Segments {
     private int mapToValue(Set<Character> output) {
         if (!isSolved())
             throw new IllegalStateException("Cannot get unscrambled values before the segments are solved");
-        
+
         return scrambledNumbers.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(output))
@@ -66,7 +72,7 @@ public class Segments {
                 .orElseThrow();
     }
 
-    public int getOutput(String[] outputs) {
+    public int getOutput(List<String> outputs) {
         int value = 0;
         for (String output : outputs) {
             value = value * 10 + mapToValue(toSet(output));
@@ -106,12 +112,12 @@ public class Segments {
         return result;
     }
 
-    public void solve(String[] scrambles) {
-        if (scrambles.length != 10) {
+    public void solve(List<String> scrambles) {
+        if (scrambles.size() != 10) {
             throw new IllegalArgumentException(
-                    "Cannot determine the segments without 10 patterns: %d".formatted(scrambles.length));
+                    "Cannot determine the segments without 10 patterns: %d".formatted(scrambles.size()));
         }
-        List<String> sorted = Arrays.stream(scrambles)
+        List<String> sorted = scrambles.stream()
                 .sorted(Comparator.comparingInt(String::length))
                 .toList();
         if (!initialise(sorted)) {
