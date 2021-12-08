@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Booter" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="Run Day" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="aoc.runner.Booter" />
     <module name="aocrunner" />
     <extension name="coverage">
