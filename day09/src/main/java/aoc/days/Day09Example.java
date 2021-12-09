@@ -7,6 +7,11 @@ import java.util.stream.Stream;
 
 public class Day09Example implements Example {
     public static final String input = """
+            2199943210
+            3987894921
+            9856789892
+            8767896789
+            9899965678
             """;
 
     @Override
@@ -16,11 +21,11 @@ public class Day09Example implements Example {
 
     @Override
     public String resultPart1() {
-        return "";
+        return "15";
     }
 
     @Override
     public String resultPart2() {
-        return "";
+        return "1134";
     }
 }
