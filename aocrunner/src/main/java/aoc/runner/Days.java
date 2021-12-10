@@ -31,7 +31,7 @@ public enum Days {
     private static final String PACKAGE_NAME = "aoc.days";
 
     public static Days dayFromInt(int value) {
-        if (value < 0 || value > Days.values().length) {
+        if (value < 1 || value > Days.values().length) {
             throw new IllegalArgumentException("This enum: '%s' only has %d elements, %d is an illegal value"
                     .formatted(Days.class.getSimpleName(), Days.values().length, value));
         }

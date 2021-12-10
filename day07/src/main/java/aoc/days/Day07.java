@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Regex;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +17,7 @@ public class Day07 extends AbstractDay {
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
         depths = new IntArrayList(
-                stream.map(str -> str.split(","))
+                stream.map(Regex::splitAtCommas)
                         .flatMap(Arrays::stream)
                         .mapToInt(Integer::parseInt)
                         .toArray()
@@ -27,7 +28,7 @@ public class Day07 extends AbstractDay {
         return depths.intStream().map(i -> Math.abs(i - moveTo)).map(fuelCalc).sum();
     }
 
-    @Override
+    @Override //339321
     public void part1() {
         int skipForMiddle = depths.size() / 2 - (depths.size() + 1) % 2;
         int[] medianValues = depths.intStream()
@@ -42,7 +43,7 @@ public class Day07 extends AbstractDay {
         result1 = Long.toString(fuelUsed);
     }
 
-    @Override //95476248 too high
+    @Override //95476244
     public void part2() {
         int forDepth = (int) Math.round(depths.intStream().sum() / (double) depths.size());
         long fuelUsed1 = calculateFuelUsed(depths, forDepth--, increasingCost);

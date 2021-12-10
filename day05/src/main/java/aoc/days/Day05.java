@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Coord;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;

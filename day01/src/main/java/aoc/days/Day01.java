@@ -20,7 +20,7 @@ public class Day01 extends AbstractDay {
 
     private long countIncreasingDifferences(IntList list, int gap) {
         return IntStream.range(gap, list.size())
-                .map(i -> list.get(i) - list.get(i - gap))
+                .map(i -> list.getInt(i) - list.getInt(i - gap))
                 .filter(i -> i > 0)
                 .count();
     }

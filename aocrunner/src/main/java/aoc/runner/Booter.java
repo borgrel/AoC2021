@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public enum Booter {
     ;
-    
+
     static final Logger logger = LoggerFactory.getLogger(Booter.class);
 
     private static OptionalInt tryParseArg(@NotNull String input) {
@@ -31,7 +31,6 @@ public enum Booter {
 
     private static @NotNull int[] parseArgs(final String[] args) {
         return Arrays.stream(args)
-                .skip(1)
                 .map(Booter::tryParseArg)
                 .filter(OptionalInt::isPresent)
                 .mapToInt(OptionalInt::getAsInt)

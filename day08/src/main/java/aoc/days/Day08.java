@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Regex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -19,8 +20,8 @@ public class Day08 extends AbstractDay {
         input = stream
                 .map(outputValues::split)
                 .map(array -> {
-                    List<String> puzzle = Arrays.stream(values.split(array[0])).toList();
-                    List<String> output = Arrays.stream(values.split(array[1])).toList();
+                    List<String> puzzle = Arrays.stream(Regex.splitAtWhiteSpace(array[0])).toList();
+                    List<String> output = Arrays.stream(Regex.splitAtWhiteSpace(array[1])).toList();
                     return new Puzzle(puzzle, output);
                 })
                 .toList();

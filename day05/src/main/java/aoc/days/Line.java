@@ -1,5 +1,9 @@
 package aoc.days;
 
+import aoc.utils.Coord;
+import aoc.utils.Regex;
+
+import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -11,7 +15,13 @@ public record Line(Coord c1, Coord c2) {
         if (values.length != 2)
             throw new IllegalArgumentException("The string '%s' does not match the format 'a,b -> c,d'");
 
-        return new Line(Coord.of(values[0]), Coord.of(values[1]));
+        return new Line(coordFromString(values[0]), coordFromString(values[1]));
+    }
+
+    private static aoc.utils.Coord coordFromString(String input) {
+        return aoc.utils.Coord.of(Arrays.stream(Regex.splitAtCommas(input))
+                .mapToInt(Integer::parseInt)
+                .toArray());
     }
 
     public Stream<Coord> points() {

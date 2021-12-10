@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Regex;
 import aoc.utils.Utils;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -21,7 +22,7 @@ public class Day04 extends AbstractDay {
 
     //suggestion from Roukanken#8774 map bingo numbers to their order, substitute boards numbers for their order value
     // find max for each row and column, min of those is the time when that board would have won, sort by those values
-    
+
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
         List<List<String>> input = stream.collect(Utils.toTextBlock()).toList();
@@ -31,7 +32,7 @@ public class Day04 extends AbstractDay {
 
         bingoNumbers = new IntArrayList(
                 input.get(0).stream()
-                        .map(str -> str.split(","))
+                        .map(Regex::splitAtCommas)
                         .flatMap(Arrays::stream)
                         .mapToInt(Integer::parseInt)
                         .toArray());

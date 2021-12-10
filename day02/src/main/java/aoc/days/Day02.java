@@ -2,6 +2,7 @@ package aoc.days;
 
 import aoc.utils.AbstractDay;
 import aoc.utils.Direction;
+import aoc.utils.Regex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -16,7 +17,7 @@ public class Day02 extends AbstractDay {
     List<Instruction> instructions;
 
     public Instruction parseLine(String input) {
-        String[] split = input.split(" ");
+        String[] split = Regex.splitAtWhiteSpace(input);
         Direction direction = directionMapping.get(split[0]);
         if (direction == null)
             throw new IllegalStateException("Input file includes invalid entry: '%s'".formatted(split[0]));

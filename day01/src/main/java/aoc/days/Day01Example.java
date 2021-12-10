@@ -5,8 +5,7 @@ import aoc.utils.Example;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-
-class Day01Example implements Example {
+public class Day01Example implements Example {
     private static final String testInput = """
             199
             200
@@ -20,21 +19,6 @@ class Day01Example implements Example {
             263
             """;
 
-    public static void main(String[] args) {
-        new Day01Example().testExamples();
-    }
-
-    //@Override
-    void testExamples() {
-        Day01 day = new Day01();
-        day.convertInput(sampleInput());
-        day.part1();
-        day.part2();
-
-        System.out.println(day.result1());
-        System.out.println(day.result2());
-    }
-
     @Override
     public Stream<String> sampleInput() {
         return Arrays.stream(testInput.split("\n"));
@@ -42,10 +26,10 @@ class Day01Example implements Example {
 
     @Override
     public String resultPart1() {
-        return null;
+        return "7";
     }
 
     @Override public String resultPart2() {
-        return null;
+        return "5";
     }
 }

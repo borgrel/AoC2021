@@ -1,6 +1,7 @@
 package aoc.days;
 
 import aoc.utils.AbstractDay;
+import aoc.utils.Regex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class Day06 extends AbstractDay {
     @Override
     public void convertInput(@NotNull Stream<String> stream) {
         lanternFishInitial = new long[MATURATION_TIME];
-        stream.map(str -> str.split(","))
+        stream.map(Regex::splitAtCommas)
                 .flatMap(Arrays::stream)
                 .mapToInt(Integer::parseInt)
                 .forEach(i -> lanternFishInitial[i]++);

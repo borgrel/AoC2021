@@ -3,19 +3,18 @@ package aoc.days;
 import aoc.utils.AbstractDay;
 import aoc.utils.Coord;
 import aoc.utils.Direction;
+import aoc.utils.Regex;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Day09 extends AbstractDay {
     private static final Logger logger = LoggerFactory.getLogger(Day09.class);
-    private static final Pattern singleChars = Pattern.compile("");
 
-    private static final int MAX_VALUE = 10;
+    private static final int MAX_VALUE = 9;
     private static final List<Direction> adjacent = List.of(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT);
 
     int[][] heightmap;
@@ -35,7 +34,7 @@ public class Day09 extends AbstractDay {
     }
 
     @Override public void convertInput(@NotNull Stream<String> stream) {
-        heightmap = stream.map(singleChars::split)
+        heightmap = stream.map(Regex::splitIntoSingleChars)
                 .map(array -> Arrays.stream(array)
                         .mapToInt(Integer::parseInt)
                         .toArray())
@@ -74,7 +73,7 @@ public class Day09 extends AbstractDay {
             if (visited.contains(current)) continue;
 
             visited.add(current);
-            if (getHeight(current).orElse(9) == 9) continue;
+            if (getHeight(current).orElse(MAX_VALUE) == MAX_VALUE) continue;
             basin.add(current);
 
             adjacent.stream().map(dir -> current.moving(dir)).forEach(process::addLast);
