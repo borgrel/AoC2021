@@ -7,6 +7,7 @@ public enum Regex {
 
     private static final Pattern singleChars = Pattern.compile("");
     private static final Pattern whiteSpace = Pattern.compile("\\s+");
+    private static final Pattern newLine = Pattern.compile("\n");
     private static final Pattern commas = Pattern.compile(",");
 
     public static String[] splitIntoSingleChars(String string) {
@@ -19,5 +20,9 @@ public enum Regex {
 
     public static String[] splitAtCommas(String string) {
         return commas.split(string);
+    }
+
+    public static String[] splitAtNewLine(String string) {
+        return newLine.split(string);
     }
 }
