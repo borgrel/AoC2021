@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 public enum FileLoader {
     ;
-    
+
     static final Logger logger = LoggerFactory.getLogger(FileLoader.class);
 
     // ----------++- FILE UTILITIES -++---------------------------------------
@@ -72,6 +72,7 @@ public enum FileLoader {
 
         writeFile(path1, input);
         writeFile(path2, input);
+        logger.info("Saved input for {}", path2.toAbsolutePath());
     }
 
     public static @NotNull Optional<Stream<String>> readInput(int dayIndex) {

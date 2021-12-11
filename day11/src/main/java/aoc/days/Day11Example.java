@@ -8,6 +8,16 @@ import java.util.stream.Stream;
 
 public class Day11Example implements Example {
     public static final String input = """
+            5483143223
+            2745854711
+            5264556173
+            6141336146
+            6357385478
+            4167524645
+            2176841721
+            6882881134
+            4846848554
+            5283751526
             """;
 
     @Override
@@ -17,11 +27,11 @@ public class Day11Example implements Example {
 
     @Override
     public String resultPart1() {
-        return "";
+        return "1656";
     }
 
     @Override
     public String resultPart2() {
-        return "";
+        return "195";
     }
 }
