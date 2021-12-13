@@ -17,7 +17,9 @@
         <module name="day04" />
         <module name="day03" />
         <module name="day02" />
+        <module name="day13" />
         <module name="day01" />
+        <module name="day12" />
         <module name="day11" />
         <module name="day10" />
       </profile>
